@@ -5,13 +5,13 @@ const GetEpisodeServers = express.Router();
 const hianime = new HiAnime.Scraper();
 
 GetEpisodeServers.get("/:epid", async (req, res) => {
-  const encodedParam = req.params.epid;
-  const episodeId = decodeURIComponent(encodedParam);
-  
-  console.log(episodeId)
+  const halfEpisodeId = req.params.epid;
+  const secondHalfEp = req.query.ep;
 
   try {
-    const data = await hianime.getEpisodeServers(episodeId);
+    const data = await hianime.getEpisodeServers(
+      `${halfEpisodeId}?ep=${secondHalfEp}`
+    );
     return res.status(200).send(data);
   } catch (err) {
     console.error("Error fetching data:", err);
@@ -20,7 +20,3 @@ GetEpisodeServers.get("/:epid", async (req, res) => {
 });
 
 export default GetEpisodeServers;
-
-
-// endcode before sending the ep id so it can't detect!! like this:
-// encodeURIComponent()
