@@ -5,14 +5,18 @@ const GetEpisodeSources = express.Router();
 const hianime = new HiAnime.Scraper();
 
 GetEpisodeSources.get("/:epid", async (req, res) => {
-  const encodedParam = req.params.epid;
-  const episodeId = decodeURIComponent(encodedParam);
+  const halfEp = req.params.epid;
   const server = req.query.s;
   const subOrDub = req.query.c;
-  console.log(episodeId);
+  const secondHalfEp = req.query.ep;
 
   try {
-    const data = await hianime.getEpisodeSources(episodeId, server, subOrDub);
+    const data = await hianime.getEpisodeSources(
+      `${halfEp}?ep=${secondHalfEp}`, server, subOrDub
+      );
+      
+      console.log(data)
+      
     return res.status(200).send(data);
   } catch (err) {
     console.error("Error fetching data:", err);
