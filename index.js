@@ -1,6 +1,11 @@
 import express from "express";
 import cors from "cors";
+import { fork } from "child_process";
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Routers
 import SearchRouter from "./routes/searchAnime.js";
 import GetAnimeInfo from "./routes/getAnimeInfo.js";
@@ -55,6 +60,7 @@ app.use("/api/mantox/schedule", GetAnimeEstimetedSchedule);
 app.use("/api/mantox/episodes", GetEpisodesByAnimeId);
 app.use("/api/mantox/episode/servers", GetEpisodeServers);
 app.use("/api/mantox/episode/sources", GetEpisodeSources);
+
 
 // Start server yeaaa
 const PORT = process.env.PORT || 3000;
