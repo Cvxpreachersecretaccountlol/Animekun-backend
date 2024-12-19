@@ -1,37 +1,26 @@
 import express from "express";
 import { HiAnime } from "aniwatch";
-import { fork } from "child_process";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const GetEpisodeSources = express.Router();
 
 GetEpisodeSources.get("/:epid", async (req, res) => {
-  const child = fork(path.join(__dirname, "scraper.js")); // Run scraper in a separate process
+  const hianime = new HiAnime.Scraper(); // Fresh instance
 
-  const params = {
-    epid: req.params.epid,
-    query: req.query,
-  };
+  const halfEpid = req.params.epid;
+  const secondHalfEpId = req.query.ep;
 
-  child.send(params);
+  const server = req.query.s || "hd-1";
+  const subOrDub = req.query.c;
 
-  child.on("message", (data) => {
-    res.status(200).send(data);
-  });
+  const episodeId = `${halfEpid}?ep=${secondHalfEpId}`;
 
-  child.on("error", (err) => {
-    res.status(500).send("Failed to fetch data.");
-  });
-
-  child.on("exit", (code) => {
-    if (code !== 0) {
-      console.error(`Child process exited with code ${code}`);
-    }
-  });
+  try {
+    const data = await hianime.getEpisodeSources(episodeId, server, subOrDub);
+    return res.status(200).send(data);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Something went wrong!");
+  }
 });
 
 export default GetEpisodeSources;
