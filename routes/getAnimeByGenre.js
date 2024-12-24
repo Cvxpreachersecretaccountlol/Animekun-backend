@@ -6,7 +6,7 @@ const hianime = new HiAnime.Scraper();
 
 GetAnimeByGenre.get("/:genre", async (req, res) => {
   const genre = req.params.genre;
-  const page = req.params.page || 1;
+  const page = req.query.page || 1;
 
   try {
     const data = await hianime.getGenreAnime(genre, page);
