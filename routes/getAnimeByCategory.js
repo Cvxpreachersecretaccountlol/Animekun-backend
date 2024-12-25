@@ -6,9 +6,10 @@ const hianime = new HiAnime.Scraper();
 
 AnimeByCategoryRouter.get("/:category", async (req, res) => {
   const category = req.params.category;
+  const page = req.query.page || 1;
 
   try {
-    const data = await hianime.getCategoryAnime(category);
+    const data = await hianime.getCategoryAnime(category, page);
     return res.status(200).send(data);
   } catch (err) {
     console.error("Error fetching data:", err);
