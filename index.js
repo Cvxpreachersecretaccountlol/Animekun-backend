@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/mantox/search", SearchRouter);
 app.use("/api/mantox/anime/info", GetAnimeInfo);
-app.use("/api/mantox/anime", AnimeByCategoryRouter);
+app.use("/api/mantox/catagory", AnimeByCategoryRouter);
 app.use("/api/mantox/anime/genre", GetAnimeByGenre);
 app.use("/api/mantox/animeinfo", GetAnimeInfoUtils);
 app.use("/api/mantox/searchsuggestion", GetSearchSuggestion);
