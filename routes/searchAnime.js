@@ -18,7 +18,7 @@ SearchRouter.get("/", async (req, res) => {
   const endDate = req.query.end_date;
 
   const genresParams = req.query.genres;
-  const genres = genresParams ? genresParams.replace(/+/g, ",") : null;
+  const genres = genresParams ? genresParams.replace(/\+/g, ",") : null;
 
   try {
     const data = await hianime.search(`${searchQuery}`, page, {
