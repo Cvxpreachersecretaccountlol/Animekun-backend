@@ -21,7 +21,8 @@ const allowedDomains = [
   "http://localhost:6700",
   "https://animekun.lol",
   "https://anime-kun-frontend-manto999s-projects.vercel.app",
-  "http://192.168.174.85:5173"
+  "http://192.168.174.85:5173",
+  "https://animekun-frontend.pages.dev"
 ];
 
 app.use(
