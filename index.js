@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
   console.log("API is running successfully!");
 });
 
-await fetchAndSaveData();
+// await fetchAndSaveData();
 
 app.use("/api/mantox/search", SearchRouter);
 app.use("/api/mantox/anime/info", GetAnimeInfo);

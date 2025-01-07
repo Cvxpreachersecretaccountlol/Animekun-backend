@@ -14,19 +14,6 @@
       }
     },
     {
-      "id": "jujutsu-kaisen-tv-534",
-      "name": "Jujutsu Kaisen (TV)",
-      "jname": "Jujutsu Kaisen (TV)",
-      "poster": "https://cdn.noitatnemucod.net/thumbnail/300x400/100/82402f796b7d84d7071ab1e03ff7747a.jpg",
-      "duration": "23m",
-      "type": "TV",
-      "rating": null,
-      "episodes": {
-        "sub": 24,
-        "dub": 24
-      }
-    },
-    {
       "id": "chainsaw-man-17406",
       "name": "Chainsaw Man",
       "jname": "Chainsaw Man",
@@ -37,6 +24,19 @@
       "episodes": {
         "sub": 12,
         "dub": 12
+      }
+    },
+    {
+      "id": "jujutsu-kaisen-tv-534",
+      "name": "Jujutsu Kaisen (TV)",
+      "jname": "Jujutsu Kaisen (TV)",
+      "poster": "https://cdn.noitatnemucod.net/thumbnail/300x400/100/82402f796b7d84d7071ab1e03ff7747a.jpg",
+      "duration": "23m",
+      "type": "TV",
+      "rating": null,
+      "episodes": {
+        "sub": 24,
+        "dub": 24
       }
     },
     {
