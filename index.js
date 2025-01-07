@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import { fetchAndSaveData } from "./fetchAndSaveData.js";
+import { fetchAndSaveData } from "./routes/fetchAndSaveData.js";
 
 // Routers
 import SearchRouter from "./routes/searchAnime.js";
