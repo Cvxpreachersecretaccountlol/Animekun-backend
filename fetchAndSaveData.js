@@ -24,17 +24,25 @@ export async function fetchAndSaveData() {
       }
     }
 
-    // Read underratedAnime.json and include its first 6 items
-    console.log("Reading underratedAnime.json...");
-    const underratedData = await fs.readFile("underratedAnime.json", "utf-8");
-    const underratedAnimes = JSON.parse(underratedData).slice(0, 6);
-    sections["underrated"] = underratedAnimes;
+    // Check if underratedAnime.json exists before reading
+    console.log("Checking if underratedAnime.json exists...");
+    try {
+      const underratedData = await fs.readFile("underratedAnime.json", "utf-8");
+      const underratedAnimes = JSON.parse(underratedData).slice(0, 6);
+      sections["underrated"] = underratedAnimes;
+    } catch (readError) {
+      console.error("Error reading underratedAnime.json:", readError);
+      sections["underrated"] = []; // Fallback to an empty array
+    }
 
     // Save updated sections to sections.json
     console.log("Saving data to sections.json...");
     await fs.writeFile("sections.json", JSON.stringify(sections, null, 2));
     console.log("Updated sections.json with all categories and underrated anime.");
+
+    return sections; // Return sections object for further use
   } catch (err) {
     console.error("Error occurred:", err);
+    throw err; // Rethrow the error after logging it
   }
 }
