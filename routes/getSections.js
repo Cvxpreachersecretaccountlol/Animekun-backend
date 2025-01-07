@@ -3,6 +3,17 @@ import axios from "axios";
 
 const GetSections = express.Router();
 
+function toCamelCase(str) {
+  // Split the string by hyphens and capitalize each word except the first one
+  return str.split('-').map((word, index) => {
+    if (index === 0) {
+      return word.toLowerCase();
+    }
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }).join('');
+}
+
+
 GetSections.get("/sections", async (req, res) => {
   try {
     // Fetch data from the provided link
@@ -18,7 +29,7 @@ GetSections.get("/sections", async (req, res) => {
 
     // Loop through the results and organize data into categories
     data.results.forEach((item) => {
-      const category = item.category;
+      const category = toCamelCase(item.category);
 
       // Parse episodes field to JSON
       const episodes = item.episodes ? JSON.parse(item.episodes) : { sub: 0, dub: 0 };
