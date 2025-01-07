@@ -1,59 +1,61 @@
 import express from "express";
-import axios from "axios";
+import {
+  mostFavorite,
+  topAiring,
+  underrated,
+  mostPopular
+} from "../important/sections.js";
 
 const GetSections = express.Router();
 
-function toCamelCase(str) {
-  // Split the string by hyphens and capitalize each word except the first one
-  return str.split('-').map((word, index) => {
-    if (index === 0) {
-      return word.toLowerCase();
-    }
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-  }).join('');
-}
-
-
 GetSections.get("/sections", async (req, res) => {
   try {
-    // Fetch data from the provided link
-    const response = await axios.get("https://animekun-gg.subhajeetchowdhury954.workers.dev/get-homepage-section");
-    const data = response.data;
+    // Structure the response
+    const response = {
+      "mostFavorite": mostFavorite.map(anime => ({
+        id: anime.id,
+        name: anime.name,
+        jname: anime.jname,
+        poster: anime.poster,
+        duration: anime.duration,
+        type: anime.type,
+        rating: anime.rating,
+        episodes: anime.episodes
+      })),
+      "mostPopular": mostPopular.map(anime => ({
+        id: anime.id,
+        name: anime.name,
+        jname: anime.jname,
+        poster: anime.poster,
+        duration: anime.duration,
+        type: anime.type,
+        rating: anime.rating,
+        episodes: anime.episodes
+      })),
+      "topAiring": topAiring.map(anime => ({
+        id: anime.id,
+        name: anime.name,
+        jname: anime.jname,
+        poster: anime.poster,
+        duration: anime.duration,
+        type: anime.type,
+        rating: anime.rating,
+        episodes: anime.episodes
+      })),
+      "underrated": underrated.map(anime => ({
+        id: anime.id,
+        name: anime.name,
+        jname: anime.jname,
+        poster: anime.poster,
+        duration: anime.duration,
+        type: anime.type,
+        rating: anime.rating,
+        episodes: anime.episodes
+      }))
+    };
 
-    if (!data || !data.results) {
-      return res.status(500).json({ error: "Invalid data format from API" });
-    }
-
-    // Structure the data
-    const structuredData = {};
-
-    // Loop through the results and organize data into categories
-    data.results.forEach((item) => {
-      const category = toCamelCase(item.category);
-
-      // Parse episodes field to JSON
-      const episodes = item.episodes ? JSON.parse(item.episodes) : { sub: 0, dub: 0 };
-
-      // Ensure the category exists in the structuredData object
-      if (!structuredData[category]) {
-        structuredData[category] = [];
-      }
-
-      // Push the formatted item into the appropriate category
-      structuredData[category].push({
-        id: item.id,
-        name: item.name,
-        jname: item.jname,
-        poster: item.poster,
-        duration: item.duration,
-        type: item.type,
-        rating: item.rating,
-        episodes: episodes,
-      });
-    });
-
-    // Send the structured JSON response
-    res.json(structuredData);
+    // Send the JSON response
+    res.status(200).json(response);
   } catch (error) {
     console.error("Error fetching or processing data:", error);
     res.status(500).json({ error: "Failed to fetch or process data" });

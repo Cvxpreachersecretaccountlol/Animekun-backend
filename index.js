@@ -43,13 +43,35 @@ app.use(
   })
 );
 
+let date = "Not updated yet";
+
+// Function to format date in "Month Day, Year" format
+const formatDate = (date) => {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Intl.DateTimeFormat("en-US", options).format(new Date(date));
+};
+
+// Function to fetch data and update the date
+const updateData = async () => {
+  try {
+    await fetchAndSaveData();
+    date = formatDate(new Date()); // Update date with a formatted string
+  } catch (error) {
+    console.error("Error fetching and saving data:", error);
+  }
+};
+
+// Initial fetch and schedule subsequent fetches every 8 hours
+updateData();
+setInterval(updateData, 8 * 60 * 60 * 1000); // 8 hours in milliseconds
+
 // API Routes
 app.get("/", (req, res) => {
-  res.json({ message: "API is running successfully!" });
-  console.log("API is running successfully!");
+  res.json({
+    message: "API is running successfully!",
+    lastSectionUpdate: date
+  });
 });
-
-await fetchAndSaveData();
 
 app.use("/api/mantox/search", SearchRouter);
 app.use("/api/mantox/anime/info", GetAnimeInfo);
