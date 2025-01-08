@@ -3,7 +3,9 @@ import {
   mostFavorite,
   topAiring,
   underrated,
-  mostPopular
+  mostPopular,
+  spotlightAnimes,
+  trendingAnimes
 } from "../important/sections.js";
 
 const GetSections = express.Router();
@@ -12,7 +14,27 @@ GetSections.get("/sections", async (req, res) => {
   try {
     // Structure the response
     const response = {
-      "mostFavorite": mostFavorite.map(anime => ({
+      spotlightAnimes: spotlightAnimes.map(anime => ({
+        rank: anime.rank,
+        id: anime.id,
+        name: anime.name,
+        jname: anime.jname,
+        description: anime.anime,
+        poster: anime.poster,
+        type: anime.type,
+        episodes: anime.episodes,
+        otherInfo: anime.otherInfo
+      })),
+      
+      trendingAnimes: trendingAnimes.map(anime => ({
+        rank: anime.rank,
+        id: anime.id,
+        name: anime.name,
+        jname: anime.jname,
+        poster: anime.poster
+      })),
+      
+      mostFavorite: mostFavorite.map(anime => ({
         id: anime.id,
         name: anime.name,
         jname: anime.jname,
@@ -22,7 +44,7 @@ GetSections.get("/sections", async (req, res) => {
         rating: anime.rating,
         episodes: anime.episodes
       })),
-      "mostPopular": mostPopular.map(anime => ({
+      mostPopular: mostPopular.map(anime => ({
         id: anime.id,
         name: anime.name,
         jname: anime.jname,
@@ -32,7 +54,7 @@ GetSections.get("/sections", async (req, res) => {
         rating: anime.rating,
         episodes: anime.episodes
       })),
-      "topAiring": topAiring.map(anime => ({
+      topAiring: topAiring.map(anime => ({
         id: anime.id,
         name: anime.name,
         jname: anime.jname,
@@ -42,7 +64,7 @@ GetSections.get("/sections", async (req, res) => {
         rating: anime.rating,
         episodes: anime.episodes
       })),
-      "underrated": underrated.map(anime => ({
+      underrated: underrated.map(anime => ({
         id: anime.id,
         name: anime.name,
         jname: anime.jname,

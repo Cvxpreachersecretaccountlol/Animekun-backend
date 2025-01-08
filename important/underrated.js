@@ -96,6 +96,48 @@ const underratedAnimes = [
       sub: 22,
       dub: 22
     }
+  },
+  {
+    id: "odd-taxi-17430",
+    name: "Odd Taxi",
+    jname: "Odd Taxi",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/a33c36da7c49e9679d1dc3b71c7ba0be.jpg",
+    duration: "23m",
+    type: "TV",
+    rating: null,
+    episodes: {
+      sub: 13,
+      dub: 13
+    }
+  },
+  {
+    id: "erased-151",
+    name: "ERASED",
+    jname: "Boku dake ga Inai Machi",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/3bfbeac90c228063d45869dbf9d5d028.jpg",
+    duration: "23m",
+    type: "TV",
+    rating: "18+",
+    episodes: {
+      sub: 12,
+      dub: 12
+    }
+  },
+  {
+    id: "summer-time-rendering-17500",
+    name: "Summer Time Rendering",
+    jname: "Summertime Render",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/ea7d0f5a13acc78dd85e81eb75ac8fdc.png",
+    duration: "24m",
+    type: "TV",
+    rating: "18+",
+    episodes: {
+      sub: 25,
+      dub: 25
+    }
   }
 ];
 
