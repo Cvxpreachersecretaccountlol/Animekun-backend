@@ -16,6 +16,7 @@ import GetEpisodesByAnimeId from "./routes/getAnimeEpesodeByAnimeId.js";
 import GetEpisodeServers from "./routes/getEpisodeServers.js";
 import GetEpisodeSources from "./routes/getEpisodeSources.js";
 import GetSections from "./routes/getSections.js";
+import Homepage from "./routes/custom.js";
 
 const app = express();
 
@@ -47,13 +48,13 @@ let date = "Not updated yet";
 
 // Function to format date in "Month Day, Year. HH:MM AM/PM" format in IST
 const formatDate = date => {
-  const options = { 
-    year: "numeric", 
-    month: "long", 
-    day: "numeric", 
-    hour: "2-digit", 
-    minute: "2-digit", 
-    hour12: true, 
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
     timeZone: "Asia/Kolkata" // Set to IST
   };
   return new Intl.DateTimeFormat("en-US", options).format(new Date(date));
@@ -93,6 +94,7 @@ app.use("/api/mantox/episodes", GetEpisodesByAnimeId);
 app.use("/api/mantox/episode/servers", GetEpisodeServers);
 app.use("/api/mantox/episode/sources", GetEpisodeSources);
 app.use("/api/mantox/get", GetSections);
+app.use("/api/mantox/get", Homepage);
 
 // Start server yeaaa
 const PORT = process.env.PORT || 3000;
