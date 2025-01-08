@@ -19,7 +19,7 @@ GetSections.get("/sections", async (req, res) => {
         id: anime.id,
         name: anime.name,
         jname: anime.jname,
-        description: anime.anime,
+        description: anime.description,
         poster: anime.poster,
         type: anime.type,
         episodes: anime.episodes,

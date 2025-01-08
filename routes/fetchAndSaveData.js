@@ -81,6 +81,7 @@ export async function fetchAndSaveData() {
       trendingAnimes.length = 0; // Clear existing data
       trendingAnimes.push(...homepageData.trendingAnimes); // Push new data
       console.log("Successfully updated 'trendingAnimes' with new data.");
+      console.log("DONE!!!");
     } else {
       console.error("No data found for 'trendingAnimes' in homepageData.");
     }
