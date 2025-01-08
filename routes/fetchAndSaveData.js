@@ -25,15 +25,18 @@ export async function fetchAndSaveData() {
         switch (category) {
           case "most-favorite":
             mostFavorite.push(...animeList);
+            mostFavorite.splice(0, mostFavorite.length - 6); // Keep only the latest 6 entries
             break;
           case "most-popular":
             mostPopular.push(...animeList);
+            mostPopular.splice(0, mostPopular.length - 6); // Keep only the latest 6 entries
             break;
           case "top-airing":
             topAiring.push(...animeList);
+            topAiring.splice(0, topAiring.length - 6); // Keep only the latest 6 entries
             break;
         }
-        console.log("pushed to objects");
+        console.log(`Updated '${category}' with new data.`);
       } else {
         console.error(
           `Unexpected data format for category "${category}":`,
@@ -51,12 +54,13 @@ export async function fetchAndSaveData() {
       duration: anime.duration,
       type: anime.type,
       rating: anime.rating,
-      episodes: anime.episodes
+      episodes: anime.episodes,
     }));
 
     underrated.push(...firstSixUnderratedAnimes);
+    underrated.splice(0, underrated.length - 6); // Keep only the latest 6 entries
 
-    console.log("Successfully mapped and pushed the first 6 objects to 'underrated'.");
+    console.log("Successfully updated 'underrated' with new data.");
 
   } catch (err) {
     console.error("Error occurred:", err);
