@@ -25,7 +25,8 @@ const allowedDomains = [
   "http://localhost:5173",
   "http://localhost:6700",
   "https://animekun.lol",
-  "http://100.86.242.64:5173"
+  "http://100.86.242.64:5173",
+  "http://localhost:3000"
 ];
 
 app.use(
