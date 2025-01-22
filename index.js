@@ -23,6 +23,7 @@ const app = express();
 // CORS configuration
 const allowedDomains = [
   "http://localhost:5173",
+  "http://localhost:5174",
   "http://localhost:6700",
   "https://animekun.lol",
   "http://100.86.242.64:5173",
