@@ -27,7 +27,8 @@ const allowedDomains = [
   "http://localhost:6700",
   "https://animekun.lol",
   "http://100.86.242.64:5173",
-  "http://localhost:3000"
+  "http://localhost:3000",
+  "https://ani-site-nextjs.vercel.app"
 ];
 
 app.use(
