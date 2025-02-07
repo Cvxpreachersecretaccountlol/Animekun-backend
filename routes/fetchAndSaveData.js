@@ -5,7 +5,9 @@ import {
   underrated,
   mostPopular,
   spotlightAnimes,
-  trendingAnimes
+  trendingAnimes,
+  topTen,
+  special
 } from "../important/sections.js";
 import { HiAnime } from "aniwatch";
 
@@ -47,6 +49,17 @@ export async function fetchAndSaveData() {
       }
     }
 
+    const specialData = await hianime.getCategoryAnime("special", "1");
+    const specialAnimeList = specialData.animes.slice(0, 32);
+    if (specialData) {
+      console.log("--> updating special animes");
+      special.length = 0;
+      special.push(...specialAnimeList); // Add new data
+      console.log("--> Done updating specials");
+    } else {
+      console.log("error happened while updating special animes");
+    }
+
     // Map and push the first 8 objects from underratedAnimes to the underrated variable
     const firstSixUnderratedAnimes = underratedAnimes
       .slice(0, 8)
@@ -72,8 +85,17 @@ export async function fetchAndSaveData() {
       spotlightAnimes.length = 0; // Clear existing data
       spotlightAnimes.push(...homepageData.spotlightAnimes); // Push new data
       console.log("Successfully updated 'spotlightAnimes' with new data.");
+      console.log("--> updating top 10");
+      topTen.t.length = 0;
+      topTen.w.length = 0;
+      topTen.m.length = 0;
+      
+      topTen.t.push(...homepageData.top10Animes.today)
+      topTen.w.push(...homepageData.top10Animes.week)
+      topTen.m.push(...homepageData.top10Animes.month)
+      console.log("--> Done updating top 10");
     } else {
-      console.error("No data found for 'spotlightAnimes' in homepageData.");
+      console.error("No data found for 'spotlightAnimes' or 'top 10' in homepageData.");
     }
 
     // Update trendingAnimes with the full data from homepageData.trendingAnimes

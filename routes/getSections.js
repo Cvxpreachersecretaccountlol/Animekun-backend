@@ -5,7 +5,9 @@ import {
   underrated,
   mostPopular,
   spotlightAnimes,
-  trendingAnimes
+  trendingAnimes,
+  special,
+  topTen
 } from "../important/sections.js";
 
 const GetSections = express.Router();
@@ -25,7 +27,7 @@ GetSections.get("/sections", async (req, res) => {
         episodes: anime.episodes,
         otherInfo: anime.otherInfo
       })),
-      
+
       trendingAnimes: trendingAnimes.map(anime => ({
         rank: anime.rank,
         id: anime.id,
@@ -33,7 +35,7 @@ GetSections.get("/sections", async (req, res) => {
         jname: anime.jname,
         poster: anime.poster
       })),
-      
+
       mostFavorite: mostFavorite.map(anime => ({
         id: anime.id,
         name: anime.name,
@@ -73,7 +75,43 @@ GetSections.get("/sections", async (req, res) => {
         type: anime.type,
         rating: anime.rating,
         episodes: anime.episodes
-      }))
+      })),
+      special: special.map(anime => ({
+        id: anime.id,
+        name: anime.name,
+        jname: anime.jname,
+        poster: anime.poster,
+        duration: anime.duration,
+        type: anime.type,
+        rating: anime.rating,
+        episodes: anime.episodes
+      })),
+      topTen: {
+        t: topTen.t.map(a => ({
+          id: a.id,
+          rank: a.rank,
+          name: a.name,
+          jname: a.jname,
+          poster: a.poster,
+          episodes: a.episodes
+        })),
+        w: topTen.w.map(a => ({
+          id: a.id,
+          rank: a.rank,
+          name: a.name,
+          jname: a.jname,
+          poster: a.poster,
+          episodes: a.episodes
+        })),
+        m: topTen.m.map(a => ({
+          id: a.id,
+          rank: a.rank,
+          name: a.name,
+          jname: a.jname,
+          poster: a.poster,
+          episodes: a.episodes
+        }))
+      }
     };
 
     // Send the JSON response

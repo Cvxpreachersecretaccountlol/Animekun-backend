@@ -17,6 +17,8 @@ import GetEpisodeServers from "./routes/getEpisodeServers.js";
 import GetEpisodeSources from "./routes/getEpisodeSources.js";
 import GetSections from "./routes/getSections.js";
 import Homepage from "./routes/custom.js";
+import NewsRouter from "./routes/getNews.js";
+import NewsById from "./routes/getNewsById.js";
 
 const app = express();
 
@@ -97,6 +99,8 @@ app.use("/api/mantox/episode/servers", GetEpisodeServers);
 app.use("/api/mantox/episode/sources", GetEpisodeSources);
 app.use("/api/mantox/get", GetSections);
 app.use("/api/mantox/get", Homepage);
+app.use("/api/mantox/get/", NewsRouter);
+app.use("/api/mantox/get/news/", NewsById);
 
 // Start server yeaaa
 const PORT = process.env.PORT || 3000;
