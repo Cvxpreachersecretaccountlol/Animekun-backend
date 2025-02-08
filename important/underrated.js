@@ -1,5 +1,33 @@
 const underratedAnimes = [
   {
+    id: "monster-37",
+    name: "Monster",
+    jname: "Monster",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/ecd3e711e8b8d78306bdcbb0a595baf1.jpg",
+    duration: "24m",
+    type: "TV",
+    rating: "18+",
+    episodes: {
+      sub: 74,
+      dub: 74
+    }
+  },
+  {
+    id: "heavenly-delusion-18349",
+    name: "Heavenly Delusion",
+    jname: "Tengoku Daimakyou",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/8bdf0705ef760a65894f3506ff474576.jpg",
+    duration: "22m",
+    type: "TV",
+    rating: null,
+    episodes: {
+      sub: 13,
+      dub: 13
+    }
+  },
+  {
     id: "steinsgate-3",
     name: "Steins;Gate",
     jname: "Steins;Gate",
@@ -13,20 +41,7 @@ const underratedAnimes = [
       dub: 24
     }
   },
-  {
-    id: "gintama-13",
-    name: "Gintama",
-    jname: "Gintama",
-    poster:
-      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/557c4c18257fd706c7ab480ce75fdd6f.jpg",
-    duration: "24m",
-    type: "TV",
-    rating: null,
-    episodes: {
-      sub: 201,
-      dub: 49
-    }
-  },
+
   {
     id: "made-in-abyss-32",
     name: "Made in Abyss",
