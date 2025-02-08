@@ -28,6 +28,20 @@ const underratedAnimes = [
     }
   },
   {
+    id: "made-in-abyss-32",
+    name: "Made in Abyss",
+    jname: "Made in Abyss",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/dd3c2fdc4c6ac5fbeb0110e9bfd465d4.jpg",
+    duration: "25m",
+    type: "TV",
+    rating: "18+",
+    episodes: {
+      sub: 13,
+      dub: 13
+    }
+  },
+  {
     id: "violet-evergarden-59",
     name: "Violet Evergarden",
     jname: "Violet Evergarden",
@@ -39,6 +53,34 @@ const underratedAnimes = [
     episodes: {
       sub: 13,
       dub: 13
+    }
+  },
+  {
+    id: "wolfs-rain-763",
+    name: "Wolf's Rain",
+    jname: "Wolf's Rain",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/48f868d581fbdb81655bd2c4abee3f7a.jpg",
+    duration: "23m",
+    type: "TV",
+    rating: null,
+    episodes: {
+      sub: 26,
+      dub: 26
+    }
+  },
+  {
+    id: "somali-and-the-forest-spirit-755",
+    name: "Somali and the Forest Spirit",
+    jname: "Somali to Mori no Kamisama",
+    poster:
+      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/3d3702812d3abc79d790a030a598c486.jpg",
+    duration: "23m",
+    type: "TV",
+    rating: null,
+    episodes: {
+      sub: 12,
+      dub: 12
     }
   },
   {
@@ -95,48 +137,6 @@ const underratedAnimes = [
     episodes: {
       sub: 22,
       dub: 22
-    }
-  },
-  {
-    id: "odd-taxi-17430",
-    name: "Odd Taxi",
-    jname: "Odd Taxi",
-    poster:
-      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/a33c36da7c49e9679d1dc3b71c7ba0be.jpg",
-    duration: "23m",
-    type: "TV",
-    rating: null,
-    episodes: {
-      sub: 13,
-      dub: 13
-    }
-  },
-  {
-    id: "erased-151",
-    name: "ERASED",
-    jname: "Boku dake ga Inai Machi",
-    poster:
-      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/3bfbeac90c228063d45869dbf9d5d028.jpg",
-    duration: "23m",
-    type: "TV",
-    rating: "18+",
-    episodes: {
-      sub: 12,
-      dub: 12
-    }
-  },
-  {
-    id: "summer-time-rendering-17500",
-    name: "Summer Time Rendering",
-    jname: "Summertime Render",
-    poster:
-      "https://cdn.noitatnemucod.net/thumbnail/300x400/100/ea7d0f5a13acc78dd85e81eb75ac8fdc.png",
-    duration: "24m",
-    type: "TV",
-    rating: "18+",
-    episodes: {
-      sub: 25,
-      dub: 25
     }
   }
 ];
