@@ -1,4 +1,5 @@
 import underratedAnimes from "../important/underrated.js";
+import axios from "axios";
 import {
   mostFavorite,
   topAiring,
@@ -7,10 +8,11 @@ import {
   spotlightAnimes,
   trendingAnimes,
   topTen,
-  special
+  special,
+  newsFeed
 } from "../important/sections.js";
 import { HiAnime } from "aniwatch";
-
+const newsApiUrl = "https://animekun.top/api/mantox/get/news/feed";
 const hianime = new HiAnime.Scraper();
 
 export async function fetchAndSaveData() {
@@ -50,7 +52,7 @@ export async function fetchAndSaveData() {
     }
 
     const specialData = await hianime.getCategoryAnime("special", "1");
-    const specialAnimeList = specialData.animes.slice(0, 32);
+    const specialAnimeList = specialData.animes.slice(0, 24);
     if (specialData) {
       console.log("--> updating special animes");
       special.length = 0;
@@ -89,14 +91,23 @@ export async function fetchAndSaveData() {
       topTen.t.length = 0;
       topTen.w.length = 0;
       topTen.m.length = 0;
-      
-      topTen.t.push(...homepageData.top10Animes.today)
-      topTen.w.push(...homepageData.top10Animes.week)
-      topTen.m.push(...homepageData.top10Animes.month)
+
+      topTen.t.push(...homepageData.top10Animes.today);
+      topTen.w.push(...homepageData.top10Animes.week);
+      topTen.m.push(...homepageData.top10Animes.month);
       console.log("--> Done updating top 10");
     } else {
-      console.error("No data found for 'spotlightAnimes' or 'top 10' in homepageData.");
+      console.error(
+        "No data found for 'spotlightAnimes' or 'top 10' in homepageData."
+      );
     }
+
+    console.log("--> getting news");
+    const fullNewsFeed = await axios.get(newsApiUrl);
+    const finalNewsFeed = fullNewsFeed.data.data.slice(0, 16) || [];
+    newsFeed.length = 0;
+    newsFeed.push(...finalNewsFeed);
+    console.log("--> Updated news feed!");
 
     // Update trendingAnimes with the full data from homepageData.trendingAnimes
     if (homepageData.trendingAnimes) {

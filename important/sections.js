@@ -10,6 +10,7 @@ const topTen = {
   m: []
 };
 const special = []
+const newsFeed = []
 
 export {
   mostFavorite,
@@ -19,5 +20,6 @@ export {
   spotlightAnimes,
   trendingAnimes,
   topTen,
-  special
+  special,
+  newsFeed
 };

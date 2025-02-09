@@ -7,7 +7,8 @@ import {
   spotlightAnimes,
   trendingAnimes,
   special,
-  topTen
+  topTen,
+  newsFeed
 } from "../important/sections.js";
 
 const GetSections = express.Router();
@@ -111,7 +112,16 @@ GetSections.get("/sections", async (req, res) => {
           poster: a.poster,
           episodes: a.episodes
         }))
-      }
+      },
+      newsFeed: newsFeed.map(n => ({
+        id: n.id,
+        title: n.title,
+        date: n.uploadedAt,
+        topics: n.topics,
+        preview: n.preview,
+        thumbnail: n.thumbnail,
+        url: n.url
+      }))
     };
 
     // Send the JSON response
