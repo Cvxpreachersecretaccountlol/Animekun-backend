@@ -19,59 +19,60 @@ import GetSections from "./routes/getSections.js";
 import Homepage from "./routes/custom.js";
 import NewsRouter from "./routes/getNews.js";
 import NewsById from "./routes/getNewsById.js";
+import Proxy from "./routes/proxy/m3u8-proxy.js";
 
 const app = express();
 
 // CORS configuration
 const allowedDomains = [
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "http://localhost:6700",
-  "https://animekun.lol",
-  "https://animekun.top",
-  "http://100.86.242.64:5173",
-  "http://localhost:3000",
-  "https://ani-site-nextjs.vercel.app"
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:6700",
+    "https://animekun.lol",
+    "https://animekun.top",
+    "http://100.86.242.64:5173",
+    "http://localhost:3000",
+    "https://ani-site-nextjs.vercel.app"
 ];
 
 app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedDomains.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Access forbidden: domain not allowed"));
-      }
-    },
-    methods: "GET",
-    allowedHeaders: "Content-Type, Authorization"
-  })
+    cors({
+        origin: (origin, callback) => {
+            if (!origin || allowedDomains.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Access forbidden: domain not allowed"));
+            }
+        },
+        methods: "GET",
+        allowedHeaders: "Content-Type, Authorization"
+    })
 );
 
 let date = "Not updated yet";
 
 // Function to format date in "Month Day, Year. HH:MM AM/PM" format in IST
 const formatDate = date => {
-  const options = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: "Asia/Kolkata" // Set to IST
-  };
-  return new Intl.DateTimeFormat("en-US", options).format(new Date(date));
+    const options = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "Asia/Kolkata" // Set to IST
+    };
+    return new Intl.DateTimeFormat("en-US", options).format(new Date(date));
 };
 
 // Function to fetch data and update the date
 const updateData = async () => {
-  try {
-    await fetchAndSaveData();
-    date = formatDate(new Date()); // Update date with formatted string in IST
-  } catch (error) {
-    console.error("Error fetching and saving data:", error);
-  }
+    try {
+      //  await fetchAndSaveData();
+        date = formatDate(new Date()); // Update date with formatted string in IST
+    } catch (error) {
+        console.error("Error fetching and saving data:", error);
+    }
 };
 
 // Initial fetch and schedule subsequent fetches every 8 hours
@@ -80,10 +81,10 @@ setInterval(updateData, 8 * 60 * 60 * 1000); // 8 hours in milliseconds
 
 // API Routes
 app.get("/", (req, res) => {
-  res.json({
-    message: "API is running successfully!",
-    lastSectionUpdate: date
-  });
+    res.json({
+        message: "API is running successfully!",
+        lastSectionUpdate: date
+    });
 });
 
 app.use("/api/mantox/search", SearchRouter);
@@ -102,8 +103,11 @@ app.use("/api/mantox/get", Homepage);
 app.use("/api/mantox/get/", NewsRouter);
 app.use("/api/mantox/get/news/", NewsById);
 
+//proxy
+app.use("/api/mantox/proxy/", Proxy);
+
 // Start server yeaaa
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running! PORT: ${PORT}`);
+    console.log(`Server is running! PORT: ${PORT}`);
 });
