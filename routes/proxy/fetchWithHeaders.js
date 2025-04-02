@@ -21,7 +21,7 @@ async function fetchWithCustomReferer(url, refererUrl) {
                 "Sec-Fetch-Site": "cross-site"
             },
             redirect: "follow",
-            timeout: 20000 // Increased timeout
+            timeout: 10000 // Increased timeout
         });
 
         return response;
