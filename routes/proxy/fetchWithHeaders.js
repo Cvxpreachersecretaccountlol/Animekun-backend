@@ -6,16 +6,22 @@ async function fetchWithCustomReferer(url, refererUrl) {
     try {
         const response = await fetch(url, {
             headers: {
-                Referer: refererUrl,
-                "User-Agent":
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-                Origin: new URL(refererUrl).origin,
-                Accept: "*/*",
+                "Referer": refererUrl,
+                "User-Agent": 
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+                "Origin": new URL(refererUrl).origin,
+                "Accept": "*/*",
                 "Accept-Language": "en-US,en;q=0.9",
-                Connection: "keep-alive"
+                "Connection": "keep-alive",
+                "X-Forwarded-For": "45.33.32.156", // Fake IP address
+                "X-Real-IP": "45.33.32.156", // Fake IP
+                "X-Requested-With": "XMLHttpRequest",
+                "Sec-Fetch-Dest": "empty",
+                "Sec-Fetch-Mode": "cors",
+                "Sec-Fetch-Site": "cross-site"
             },
             redirect: "follow",
-            timeout: 10000 // 10 second timeout
+            timeout: 20000 // Increased timeout
         });
 
         return response;

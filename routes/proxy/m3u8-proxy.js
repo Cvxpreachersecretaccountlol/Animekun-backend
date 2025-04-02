@@ -22,6 +22,7 @@ Proxy.get("/", async (req, res) => {
 
         // Get the raw M3U8 content
         const m3u8Content = await response.text();
+       // console.log("heyy:", m3u8Content);
 
         // Set correct headers for an M3U8 playlist
         res.setHeader("Content-Type", "application/vnd.apple.mpegurl");
