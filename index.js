@@ -68,7 +68,7 @@ const formatDate = date => {
 // Function to fetch data and update the date
 const updateData = async () => {
     try {
-      //  await fetchAndSaveData();
+          await fetchAndSaveData();
         date = formatDate(new Date()); // Update date with formatted string in IST
     } catch (error) {
         console.error("Error fetching and saving data:", error);
