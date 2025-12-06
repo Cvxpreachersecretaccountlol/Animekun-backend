@@ -16,6 +16,7 @@ GetEpisodeSources.get("/:epid", async (req, res) => {
 
   try {
     const data = await hianime.getEpisodeSources(episodeId, server, subOrDub);
+    // console.log(data);
     return res.status(200).send(data);
   } catch (err) {
     console.error(err);

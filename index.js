@@ -16,7 +16,6 @@ import GetEpisodesByAnimeId from "./routes/getAnimeEpesodeByAnimeId.js";
 import GetEpisodeServers from "./routes/getEpisodeServers.js";
 import GetEpisodeSources from "./routes/getEpisodeSources.js";
 import GetSections from "./routes/getSections.js";
-import Homepage from "./routes/custom.js";
 import NewsRouter from "./routes/getNews.js";
 import NewsById from "./routes/getNewsById.js";
 import Proxy from "./routes/proxy/m3u8-proxy.js";
@@ -28,11 +27,10 @@ const allowedDomains = [
     "http://localhost:5173",
     "http://localhost:5174",
     "http://localhost:6700",
-    "https://animekun.lol",
-    "https://animekun.top",
-    "http://100.86.242.64:5173",
     "http://localhost:3000",
-    "https://ani-site-nextjs.vercel.app"
+    "http://localhost:3001",
+    "http://localhost:3002",
+    "http://localhost:4000",
 ];
 
 app.use(
@@ -68,7 +66,7 @@ const formatDate = date => {
 // Function to fetch data and update the date
 const updateData = async () => {
     try {
-          await fetchAndSaveData();
+        await fetchAndSaveData();
         date = formatDate(new Date()); // Update date with formatted string in IST
     } catch (error) {
         console.error("Error fetching and saving data:", error);
@@ -99,7 +97,6 @@ app.use("/api/mantox/episodes", GetEpisodesByAnimeId);
 app.use("/api/mantox/episode/servers", GetEpisodeServers);
 app.use("/api/mantox/episode/sources", GetEpisodeSources);
 app.use("/api/mantox/get", GetSections);
-app.use("/api/mantox/get", Homepage);
 app.use("/api/mantox/get/", NewsRouter);
 app.use("/api/mantox/get/news/", NewsById);
 
@@ -107,7 +104,7 @@ app.use("/api/mantox/get/news/", NewsById);
 app.use("/api/mantox/proxy/", Proxy);
 
 // Start server yeaaa
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server is running! PORT: ${PORT}`);
 });

@@ -12,7 +12,7 @@ import {
   newsFeed
 } from "../important/sections.js";
 import { HiAnime } from "aniwatch";
-const newsApiUrl = "https://animekun.top/api/mantox/get/news/feed";
+const newsApiUrl = "http://localhost:3000/api/mantox/get/news/feed";
 const hianime = new HiAnime.Scraper();
 
 export async function fetchAndSaveData() {
