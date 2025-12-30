@@ -1,24 +1,16 @@
 import express from "express";
 import fetch from "node-fetch";
 import NodeCache from "node-cache";
-import morgan from "morgan";
-import helmet from "helmet";
 import { URL } from "url";
 
 const Proxy = express.Router();
 
-// ============================================
-// CONFIGURATION
-// ============================================
 
 const REFERER_URL = "https://megacloud.club/";
 
 // Initialize cache with a TTL of 10 minutes (600 seconds)
 const cache = new NodeCache({ stdTTL: 600 });
 
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
 
 /**
  * Fetch content from URL with custom referer and headers, with retry logic
@@ -90,22 +82,11 @@ function rewritePlaylistUrls(playlistText, baseUrl, proxyBaseUrl) {
         .join("\n");
 }
 
-// ============================================
-// ROUTES
-// ============================================
-
-/**
- * Health check endpoint
- */
 Proxy.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
 });
 
-/**
- * Main streaming proxy endpoint with caching
- * Query parameters:
- *   - url: The URL to proxy (required)
- */
+
 Proxy.get('/', async (req, res) => {
     try {
         const url = decodeURIComponent(req.query.url);
@@ -167,9 +148,6 @@ Proxy.get('/', async (req, res) => {
     }
 });
 
-// ============================================
-// ERROR HANDLING
-// ============================================
 
 Proxy.use((err, req, res, next) => {
     console.error('Server error:', err.stack);

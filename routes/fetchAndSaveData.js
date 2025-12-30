@@ -12,7 +12,19 @@ import {
   newsFeed
 } from "../important/sections.js";
 import { HiAnime } from "aniwatch";
-const newsApiUrl = "http://localhost:3000/api/mantox/get/news/feed";
+// Build a full URL for internal API routes so this code works both locally and when hosted.
+const newsApiPath = "/api/mantox/get/news?topic=anime";
+
+function getBaseUrl() {
+  if (process.env.BASE_URL) return process.env.BASE_URL.replace(/\/$/, "");
+  if (process.env.VERCEL_URL)
+    return `https://${process.env.VERCEL_URL.replace(/^https?:\/\//, "").replace(/\/$/, "")}`;
+  if (process.env.NODE_ENV === "development") return `http://localhost:${process.env.PORT || 4000}`;
+  return `http://localhost:${process.env.PORT || 4000}`;
+}
+
+// Use a function so the URL is resolved at runtime.
+const newsApiUrl = () => `${getBaseUrl()}${newsApiPath}`;
 const hianime = new HiAnime.Scraper();
 
 export async function fetchAndSaveData() {
@@ -103,8 +115,9 @@ export async function fetchAndSaveData() {
     }
 
     console.log("--> getting news");
-    const fullNewsFeed = await axios.get(newsApiUrl);
-    const finalNewsFeed = fullNewsFeed.data.data.slice(0, 16) || [];
+    const fullNewsFeed = await axios.get(newsApiUrl());
+    //console.log("--> fetched news", fullNewsFeed.data);
+    const finalNewsFeed = fullNewsFeed.data.slice(0, 16) || [];
     newsFeed.length = 0;
     newsFeed.push(...finalNewsFeed);
     console.log("--> Updated news feed!");
