@@ -11,7 +11,7 @@ import GetAnimeEstimetedSchedule from './getAnimeEstimatedSchedule.js';
 import GetEpisodesByAnimeId from './getAnimeEpesodeByAnimeId.js';
 import GetEpisodeServers from './getEpisodeServers.js';
 import GetEpisodeSources from './getEpisodeSources.js';
-import GetSections from './getSections.js';
+import GetHomepage from './getHomepage.js';
 import NewsRouter from './getNews.js';
 import NewsById from './getNewsById.js';
 import Proxy from './proxy/m3u8-proxy.js';
@@ -19,6 +19,7 @@ import Proxy from './proxy/m3u8-proxy.js';
 const router = express.Router();
 
 // routes
+router.use('/mantox/get', GetHomepage);
 router.use('/mantox/search', SearchRouter);
 router.use('/mantox/anime/info', GetAnimeInfo);
 router.use('/mantox/catagory', AnimeByCategoryRouter);
@@ -30,7 +31,6 @@ router.use('/mantox/schedule', GetAnimeEstimetedSchedule);
 router.use('/mantox/episodes', GetEpisodesByAnimeId);
 router.use('/mantox/episode/servers', GetEpisodeServers);
 router.use('/mantox/episode/sources', GetEpisodeSources);
-router.use('/mantox/get', GetSections);
 router.use('/mantox/get/', NewsRouter);
 router.use('/mantox/get/news/', NewsById);
 

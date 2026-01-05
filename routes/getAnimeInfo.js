@@ -4,11 +4,10 @@ const GetAnimeInfo = express.Router();
 
 const hianime = new HiAnime.Scraper();
 
-GetAnimeInfo.get("/:id", async (req, res) => {
-  const animeId = req.params.id;
+GetAnimeInfo.get("/:animeId", async (req, res) => {
 
   try {
-    const data = await hianime.getInfo(animeId);
+    const data = await hianime.getInfo(req.params.animeId);
     return res.status(200).send(data);
   } catch (err) {
     console.error("Error fetching data:", err);

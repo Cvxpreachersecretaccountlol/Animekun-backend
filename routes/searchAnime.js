@@ -30,7 +30,8 @@ SearchRouter.get("/", async (req, res) => {
       season: season,
       start_date: startDate,
       end_date: endDate,
-      genres: genres
+      genres: genres,
+      score: score
     });
     return res.status(200).send(data);
   } catch (err) {

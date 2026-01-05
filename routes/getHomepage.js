@@ -11,9 +11,9 @@ import {
   newsFeed
 } from "../important/sections.js";
 
-const GetSections = express.Router();
+const GetHomepage = express.Router();
 
-GetSections.get("/sections", async (req, res) => {
+GetHomepage.get("/homepage", async (req, res) => {
   try {
     // Structure the response
     const response = {
@@ -132,4 +132,4 @@ GetSections.get("/sections", async (req, res) => {
   }
 });
 
-export default GetSections;
+export default GetHomepage;
