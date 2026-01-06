@@ -879,7 +879,7 @@ console.log(data);
 
 | Parameter |  Type  |             Description              | Required? | Default |
 | :-------: | :----: | :----------------------------------: | :-------: | :-----: |
-| `genre` | string | The unique anime id (in kebab case). |    Yes    |   --    |
+| `genre` | string | Anime genre eg: `action`, `thriller`, `romance`, etc. |    Yes    |   --    |
 
 
 #### Query Parameters
