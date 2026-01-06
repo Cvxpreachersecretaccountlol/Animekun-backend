@@ -22,7 +22,7 @@ const router = express.Router();
 router.use('/mantox/get', GetHomepage);
 router.use('/mantox/search', SearchRouter);
 router.use('/mantox/anime/info', GetAnimeInfo);
-router.use('/mantox/get/anime/catagory', AnimeByCategoryRouter);
+router.use('/mantox/get/anime/category', AnimeByCategoryRouter);
 router.use('/mantox/get/anime/genre', GetAnimeByGenre);
 router.use('/mantox/get/raw', GetAnimeInfoUtils);
 router.use('/mantox/searchsuggestion', GetSearchSuggestion);

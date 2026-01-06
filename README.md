@@ -733,21 +733,21 @@ console.log(data);
 <details>
 <summary>
 
-### `GET` Animes By Catagory
+### `GET` Animes By Category
 
 </summary>
 
 #### Route Schema (URL)
 
 ```bash
-/api/mantox/get/anime/catagory/{catagory}
+/api/mantox/get/anime/category/{category}
 ```
 
 #### Path Parameters
 
 | Parameter |  Type  |             Description              | Required? | Default |
 | :-------: | :----: | :----------------------------------: | :-------: | :-----: |
-| `catagory` | string | The unique anime id (in kebab case). |    Yes    |   --    |
+| `catagory` | string | Anime category eg: `most-favorite`, `most-popular`, `subbed-anime`, `dubbed-anime`, etc. |    Yes    |   --    |
 
 #### Query Parameters
 
