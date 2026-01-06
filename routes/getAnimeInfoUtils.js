@@ -4,7 +4,7 @@ const GetAnimeInfoUtils = express.Router();
 
 const hianime = new HiAnime.Scraper();
 
-GetAnimeInfoUtils.get("/utils", async (req, res) => {
+GetAnimeInfoUtils.get("/homepage", async (req, res) => {
 
   try {
     const data = await hianime.getHomePage();

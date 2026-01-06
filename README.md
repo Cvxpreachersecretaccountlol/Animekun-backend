@@ -231,6 +231,224 @@ console.log(data);
 
 </details>
 
+<details>
+<summary>
+
+### `GET` Raw Hianime Homepage
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/raw/homepage
+```
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/raw/homepage";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    spotlightAnimes: [
+      {
+        rank: number,
+        id: string,
+        name: string,
+        jname: string,
+        description: string,
+        poster: string,
+        type: string, // TV | Movie | OVA | ONA | Special
+        episodes: {
+          sub: number,
+          dub: number | null
+        },
+        otherInfo: string[] // [type, duration, releaseDate, quality]
+      },
+      { ... }
+    ],
+
+    trendingAnimes: [
+      {
+        rank: number,
+        id: string,
+        name: string,
+        jname: string,
+        poster: string
+      },
+      { ... }
+    ],
+
+    latestEpisodeAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        duration: string,
+        type: string,
+        rating: string | null,
+        episodes: {
+          sub: number,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    topUpcomingAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        duration: string, // date or "?"
+        type: string,     // TV (? eps) | Movie (1 eps) | ONA (? eps)
+        rating: string | null,
+        episodes: {
+          sub: number | null,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    top10Animes: {
+      today: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ],
+
+      week: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ],
+
+      month: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ]
+    },
+
+    topAiringAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        type: string, // TV | ONA | OVA | Special
+        episodes: {
+          sub: number,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    mostPopularAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        type: string,
+        episodes: {
+          sub: number,
+          dub: number
+        }
+      },
+      { ... }
+    ],
+
+    mostFavoriteAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        type: string,
+        episodes: {
+          sub: number,
+          dub: number
+        }
+      },
+      { ... }
+    ],
+
+    latestCompletedAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        type: string,
+        episodes: {
+          sub: number,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    genres: string[]
+  }
+}
+
+
+```
+
+</details>
+
 
 <details>
 
@@ -346,7 +564,6 @@ console.log(data);
 
 
 <details>
-
 <summary>
 
 ### `GET` Anime Info
@@ -506,6 +723,238 @@ console.log(data);
         }
       }
     ]
+  }
+}
+
+```
+
+</details>
+
+<details>
+<summary>
+
+### `GET` Animes By Catagory
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/anime/catagory/{catagory}
+```
+
+#### Path Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `catagory` | string | The unique anime id (in kebab case). |    Yes    |   --    |
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `page` | number | Page number |    No    |   1    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/anime/catagory/most-favorite";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    animes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        duration: string, // e.g. "24m"
+        type: string,     // TV | Movie | OVA | ONA | Special
+        rating: string | null, // e.g. "PG-13"
+        episodes: {
+          sub: number,
+          dub: number
+        }
+      },
+      { ... }
+    ],
+
+    genres: string[],
+
+    top10Animes: {
+      today: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ],
+
+      week: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ],
+
+      month: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ]
+    },
+
+    category: string, // e.g. "Most Favorite", "Most Popular", etc.
+
+    pagination: {
+      totalPages: number,
+      currentPage: number,
+      hasNextPage: boolean
+    }
+  }
+}
+
+
+```
+
+</details>
+
+<details>
+<summary>
+
+### `GET` Animes By Genre
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/anime/genre/{genre}
+```
+
+#### Path Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `genre` | string | The unique anime id (in kebab case). |    Yes    |   --    |
+
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `page` | number | Page number |    No    |   1    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/anime/genre/action";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    genreName: string, // e.g. "Action Anime"
+
+    animes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        duration: string, // e.g. "24m", "95m"
+        type: string,     // TV | Movie | OVA | ONA | Special
+        rating: string | null, // e.g. "Pg-13"
+        episodes: {
+          sub: number,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    genres: string[],
+
+    topAiringAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        type: string, // TV | ONA | OVA | Special
+        episodes: {
+          sub: number,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    pagination: {
+      totalPages: number,
+      currentPage: number,
+      hasNextPage: boolean
+    }
   }
 }
 
