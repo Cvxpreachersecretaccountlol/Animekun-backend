@@ -1,10 +1,10 @@
 import express from "express";
 import { HiAnime } from "aniwatch";
-const GetAnimeByProducer = express.Router();
+const GetAnimesByProducer = express.Router();
 
 const hianime = new HiAnime.Scraper();
 
-GetAnimeByProducer.get("/:producer", async (req, res) => {
+GetAnimesByProducer.get("/:producer", async (req, res) => {
   const producer = req.params.producer;
   const page = req.query.page || 1;
 
@@ -17,4 +17,4 @@ GetAnimeByProducer.get("/:producer", async (req, res) => {
   }
 });
 
-export default GetAnimeByProducer;
+export default GetAnimesByProducer;

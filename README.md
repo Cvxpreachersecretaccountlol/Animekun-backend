@@ -747,7 +747,7 @@ console.log(data);
 
 | Parameter |  Type  |             Description              | Required? | Default |
 | :-------: | :----: | :----------------------------------: | :-------: | :-----: |
-| `catagory` | string | Anime category eg: `most-favorite`, `most-popular`, `subbed-anime`, `dubbed-anime`, etc. |    Yes    |   --    |
+| `category` | string | Anime category eg: `most-favorite`, `most-popular`, `subbed-anime`, `dubbed-anime`, etc. |    Yes    |   --    |
 
 #### Query Parameters
 
@@ -761,7 +761,7 @@ console.log(data);
 ```javascript
 import axios from "axios";
 
-const url = "/api/mantox/get/anime/catagory/most-favorite";
+const url = "/api/mantox/get/anime/category/most-favorite";
 const data = async () => {
  try {
  const { data } = await axios.get(url);
@@ -960,4 +960,278 @@ console.log(data);
 
 ```
 
+</details>
+
+<details>
+<summary>
+
+### `GET` Animes By Producer
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/anime/producer/{query}
+```
+
+#### Path Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `producer` | string | Anime producer eg: `mappa`, `twin-engine`, `toho-animation`, etc. |    Yes    |   --    |
+
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `page` | number | Page number |    No    |   1    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/anime/producer/mappa";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    producerName: string, // e.g. "MAPPA Anime"
+
+    animes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        duration: string, // e.g. "23m", "95m"
+        type: string,     // TV | Movie | OVA | ONA | Special
+        rating: string | null, // e.g. "18+"
+        episodes: {
+          sub: number,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    top10Animes: {
+      today: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ],
+
+      week: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ],
+
+      month: [
+        {
+          id: string,
+          rank: number,
+          name: string,
+          jname: string,
+          poster: string,
+          episodes: {
+            sub: number,
+            dub: number | null
+          }
+        },
+        { ... }
+      ]
+    },
+
+    topAiringAnimes: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        type: string, // TV | ONA | OVA | Special
+        episodes: {
+          sub: number,
+          dub: number | null
+        }
+      },
+      { ... }
+    ],
+
+    pagination: {
+      totalPages: number,
+      currentPage: number,
+      hasNextPage: boolean
+    }
+  }
+}
+```
+</details>
+
+
+<details>
+<summary>
+
+### `GET` Search Suggestion
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/searchsuggestion?q={query}
+```
+
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `query` | string | Query to get search suggestion |    yes    |   --    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/searchsuggestion?q=blue-lock";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    suggestions: [
+      {
+        id: string,
+        name: string,
+        jname: string,
+        poster: string,
+        moreInfo: [
+          string, // release date (e.g. "Feb 17, 2023")
+          string, // type (TV | Movie | OVA | ONA | Special)
+          string  // duration (e.g. "24m", "1h 59m")
+        ]
+      },
+      { ... }
+    ]
+  }
+}
+```
+</details>
+
+
+<details>
+<summary>
+
+### `GET` Anime Airing Estimated SChedule
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/anime/schedule/{date}
+```
+
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `date` | string | Date to get anime airing schedule in this formate - "yyyy-mm-dd"  |    yes    |   --    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/anime/schedule/2026-01-14";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    scheduledAnimes: [
+      {
+        id: string,
+        time: string, // HH:mm (local airing time)
+        name: string,
+        jname: string,
+        airingTimestamp: number, // Unix timestamp in milliseconds
+        secondsUntilAiring: number, // seconds remaining until episode airs
+        episode: number // episode number that will air
+      },
+      { ... }
+    ]
+  }
+}
+
+```
 </details>

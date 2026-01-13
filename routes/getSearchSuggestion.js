@@ -7,6 +7,10 @@ const hianime = new HiAnime.Scraper();
 GetSearchSuggestion.get("/", async (req, res) => {
   const query = req.query.q;
 
+  if (!query) {
+    return res.status(400).send("Query parameter 'q' is required.");
+  }
+
   try {
     const data = await hianime.searchSuggestions(query);
     return res.status(200).send(data);

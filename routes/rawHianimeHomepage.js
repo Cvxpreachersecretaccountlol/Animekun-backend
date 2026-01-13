@@ -1,11 +1,10 @@
 import express from "express";
 import { HiAnime } from "aniwatch";
-const GetAnimeInfoUtils = express.Router();
+const RawHianimeHomepage = express.Router();
 
 const hianime = new HiAnime.Scraper();
 
-GetAnimeInfoUtils.get("/homepage", async (req, res) => {
-
+RawHianimeHomepage.get("/homepage", async (req, res) => {
   try {
     const data = await hianime.getHomePage();
     return res.status(200).send(data);
@@ -15,4 +14,4 @@ GetAnimeInfoUtils.get("/homepage", async (req, res) => {
   }
 });
 
-export default GetAnimeInfoUtils;
+export default RawHianimeHomepage;
