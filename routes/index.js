@@ -28,9 +28,9 @@ router.use('/mantox/get/raw', RawHianimeHomepage);
 router.use('/mantox/get/searchsuggestion', GetSearchSuggestion);
 router.use('/mantox/get/anime/producer', GetAnimesByProducer);
 router.use('/mantox/get/anime/schedule', GetAnimeEstimetedSchedule);
-router.use('/mantox/episodes', GetEpisodesByAnimeId);
-router.use('/mantox/episode/servers', GetEpisodeServers);
-router.use('/mantox/episode/sources', GetEpisodeSources);
+router.use('/mantox/get/episodes', GetEpisodesByAnimeId);
+router.use('/mantox/get/episode/servers', GetEpisodeServers);
+router.use('/mantox/get/episode/sources', GetEpisodeSources);
 router.use('/mantox/get/', NewsRouter);
 router.use('/mantox/get/news/', NewsById);
 

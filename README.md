@@ -972,7 +972,7 @@ console.log(data);
 #### Route Schema (URL)
 
 ```bash
-/api/mantox/get/anime/producer/{query}
+/api/mantox/get/anime/producer/{producer}
 ```
 
 #### Path Parameters
@@ -1234,4 +1234,468 @@ console.log(data);
 }
 
 ```
+</details>
+
+<details>
+<summary>
+
+### `GET` Episodes By Anime ID
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/episodes/{animeId}
+```
+
+#### Path Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `animeId` | string | The unique anime id (in kebab case). |    Yes    |   --    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/episodes/chainsaw-man-17406";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    totalEpisodes: number,
+
+    episodes: [
+      {
+        title: string,
+        episodeId: string, // unique episode identifier / watch URL param
+        number: number,    // episode number
+        isFiller: boolean
+      },
+      { ... }
+    ]
+  }
+}
+
+
+```
+
+</details>
+
+
+<details>
+<summary>
+
+### `GET` Episode Servers
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/episode/servers/{episodeId}
+```
+
+#### Path Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `episodeId` | string | The unique episode id (partial). |    Yes    |   --    |
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `ep` | string | The second half of the episode ID |    Yes    |   --    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/episode/servers/chainsaw-man-17406?ep=94597";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    episodeId: string, // episode identifier
+    episodeNo: number,
+
+    sub: [
+      {
+        serverName: string, // e.g. "hd-1", "hd-2"
+        serverId: number
+      },
+      { ... }
+    ],
+
+    dub: [
+      {
+        serverName: string,
+        serverId: number
+      },
+      { ... }
+    ],
+
+    raw: [
+      {
+        serverName: string,
+        serverId: number
+      },
+      { ... }
+    ]
+  }
+}
+
+
+```
+
+</details>
+
+
+<details>
+<summary>
+
+### `GET` Episode Sources
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/episode/sources/{episodeId}
+```
+
+#### Path Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `episodeId` | string | The unique episode id (partial). |    Yes    |   --    |
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `ep` | string | The second half of the episode ID |    Yes    |   --    |
+| `s` | string | Server ID to fetch sources from |    No     | `hd-1` |
+| `c` | string | Category: `sub` for subtitled or `dub` for dubbed |    No     |   --    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/episode/sources/chainsaw-man-17406?ep=94597&s=hd-1&c=sub";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    headers: {
+      Referer: string // required request header for stream playback
+    },
+
+    tracks: [
+      {
+        url: string,  // VTT subtitle or thumbnails file
+        lang: string  // e.g. "English", "Spanish", "Arabic", "thumbnails"
+      },
+      { ... }
+    ],
+
+    intro: {
+      start: number, // seconds
+      end: number
+    },
+
+    outro: {
+      start: number, // seconds
+      end: number
+    },
+
+    sources: [
+      {
+        url: string,   // stream URL
+        isM3U8: boolean,
+        type: string   // "hls"
+      },
+      { ... }
+    ],
+
+    anilistID: number,
+    malID: number
+  }
+}
+
+```
+
+</details>
+
+
+<details>
+<summary>
+
+### `GET` Anime News
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/news
+```
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `topic` | string | Filter news by topic (optional) |    No     |   --    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/news";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    news: [
+      {
+        id: string,         // unique article identifier / slug
+        title: string,
+        uploadedAt: string, // formatted date-time (e.g. "Jan 23, 21:09")
+
+        topics: [
+          string // e.g. "anime", "manga"
+        ],
+
+        preview: {
+          intro: string, // short preview text (may be empty)
+          full: string   // full preview text (may be empty)
+        },
+
+        thumbnail: string, // image URL
+        url: string        // full article URL
+      },
+      { ... }
+    ]
+  }
+}
+
+
+```
+
+</details>
+
+
+<details>
+<summary>
+
+### `GET` News Article By ID
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/get/news/info
+```
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `id` | string | The unique news article ID |    Yes    |   --    |
+
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+const url = "/api/mantox/get/news/info?id=2026-01-23/japanese-animation-tv-ranking-january-12-18/.233401";
+const data = async () => {
+ try {
+ const { data } = await axios.get(url);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+#### Response Schema
+
+```javascript
+{
+  success: boolean,
+  data: {
+    id: string,         
+    title: string,
+    uploadedAt: string,
+    intro: string,      
+    description: string,
+    thumbnail: string,   
+    url: string
+  }
+}
+
+```
+
+</details>
+
+
+<details>
+<summary>
+
+### `GET` M3U8 Proxy
+
+</summary>
+
+#### Route Schema (URL)
+
+```bash
+/api/mantox/proxy/
+```
+
+#### Query Parameters
+
+| Parameter |  Type  |             Description              | Required? | Default |
+| :-------: | :----: | :----------------------------------: | :-------: | :-----: |
+| `url` | string | The URL to proxy (m3u8 playlist or video segment) |    Yes    |   --    |
+
+
+#### Description
+
+This is a media proxy endpoint that handles streaming of anime content. It supports:
+- **M3U8 Playlist Rewriting**: Automatically rewrites M3U8 playlists to proxy all segment URLs
+- **Video Segment Streaming**: Proxies video segments (.ts files) with proper headers
+- **Caching**: Implements intelligent caching (10 minutes for playlists, 1 year for segments)
+- **Retry Logic**: Includes automatic retry with exponential backoff for failed requests
+- **Custom Headers**: Sends appropriate referer and user-agent headers for compatibility
+
+#### Request Sample
+
+```javascript
+import axios from "axios";
+
+// For M3U8 playlist
+const playlistUrl = "/api/mantox/proxy/?url=https://rainveil36.xyz/...../master.m3u8";
+
+// For video segment
+const segmentUrl = "/api/mantox/proxy/?url=https%3A%2F%2Fexample.com%2Fsegment.ts";
+
+const data = async () => {
+ try {
+ const { data } = await axios.get(playlistUrl);
+ return data;
+ } catch (err) {
+ throw new Error(err.message);
+ }
+};
+
+console.log(data);
+
+```
+
+#### Response Schema
+
+**For M3U8 Playlists:**
+```
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:10
+#EXTINF:9.9,
+/api/mantox/proxy/?url=https%3A%2F%2Fexample.com%2Fsegment1.ts
+#EXTINF:9.9,
+/api/mantox/proxy/?url=https%3A%2F%2Fexample.com%2Fsegment2.ts
+...
+#EXT-X-ENDLIST
+```
+
+**For Video Segments:**
+Binary video data (MPEG-TS format)
+
+#### Health Check
+
+```bash
+GET /api/mantox/proxy/health
+```
+
+Returns:
+```javascript
+{
+  status: "ok"
+}
+```
+
 </details>
