@@ -19,6 +19,38 @@
 
 An open-source anime API that provides scraped data such as anime information, streaming links, and anime & manga news.
 
+## Table of Contents
+
+- [Usage & Deployment](#usage--deployment)
+- [Local Installation](#local-installation)
+- [Documentation](#documentation)
+  - [Anime HomePage](#get-anime-homepage)
+  - [Raw Hianime Homepage](#get-raw-hianime-homepage)
+  - [Anime Search](#get-anime-search)
+  - [Anime Info](#get-anime-info)
+  - [Animes By Category](#get-animes-by-category)
+  - [Animes By Genre](#get-animes-by-genre)
+  - [Animes By Producer](#get-animes-by-producer)
+  - [Search Suggestion](#get-search-suggestion)
+  - [Anime Airing Estimated Schedule](#get-anime-airing-estimated-schedule)
+  - [Episodes By Anime ID](#get-episodes-by-anime-id)
+  - [Episode Servers](#get-episode-servers)
+  - [Episode Sources](#get-episode-sources)
+  - [Anime News](#get-anime-news)
+  - [News Article By ID](#get-news-article-by-id)
+  - [M3U8 Proxy](#get-m3u8-proxy)
+- [Contributing](#contributing)
+- [Support](#support)
+- [Thanks](#thanks)
+
+## Usage & deployment
+
+This project is divided into three repositories:
+
+1. **Frontend** – [@Subhajeetch/Animekun-frontend](https://github.com/Subhajeetch/Animekun-frontend) 
+2. **Backend** – [@Subhajeetch/Animekun-backend](https://github.com/Subhajeetch/Animekun-backend) *(You are currently viewing this repository)*
+3. **Database** – Cloudflare D1 [@Subhajeetch/Animekun-db-cf](https://github.com/Subhajeetch/Animekun-db-cf)
+
 ## Local Installation
 1. Run the following code to clone the repository and install all required dependencies
 
@@ -1699,3 +1731,25 @@ Returns:
 ```
 
 </details>
+
+
+
+## Contributing
+
+Contributions are welcome!  
+Please read the [CONTRIBUTING.md](/docs/CONTRIBUTING.md) file for setup instructions, development guidelines, and contribution details.
+
+## Support
+If you like this project, consider giving it a <strong>star 🌟</strong>
+
+Connect with me on X (Twitter): [@subhajeetch](https://x.com/subhajeetch)  
+Join the Discord community: [Animekun](https://discord.gg/6DhssCN2Ph)
+
+## Thanks
+
+- [consumet.ts](https://github.com/consumet/consumet.ts)
+- [aniwatch](https://github.com/ghoshRitesh12/aniwatch)
+
+## License
+
+This project is licensed under the [MIT License](https://opensource.org/license/mit/) - see the [LICENSE](/LICENSE) file for more details.
