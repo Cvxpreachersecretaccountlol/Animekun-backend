@@ -6,8 +6,15 @@
 	<br />
 	<p>
 		<a href="https://discord.gg/6DhssCN2Ph"><img src="https://img.shields.io/badge/join_our-discord-5865F2?logo=discord&logoColor=white" alt="Discord server" /></a>
-        <a href="https://github.com/discordjs/discord.js/commits/main"><img src="https://img.shields.io/github/last-commit/subhajeetch/clean-bubble.svg?logo=github&logoColor=ffffff" alt="Last commit." /></a>
-        <h1>Animekun Backend</h1>
+		<a href="https://github.com/Subhajeetch/Animekun-backend"><img src="https://img.shields.io/github/last-commit/Subhajeetch/Animekun-backend.svg?logo=github&logoColor=ffffff" alt="Last commit" /></a>
+		<a href="#"><img src="https://img.shields.io/badge/Node.js-18.x+-339933?logo=node.js&logoColor=white" alt="Node.js" /></a>
+		<a href="#"><img src="https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white" alt="Express.js" /></a>
+	</p>
+	<p>
+		<a href="#"><img src="https://img.shields.io/badge/Cheerio-Web%20Scraping-F0DB4F" alt="Cheerio" /></a>
+		<a href="#"><img src="https://img.shields.io/badge/Axios-HTTP-5A29E4" alt="Axios" /></a>
+	</p>
+	<h1>Animekun Backend</h1>
 </div>
 
 
