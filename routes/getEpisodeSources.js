@@ -1,27 +1,38 @@
-import express from "express";
+import { Router } from "express";
 import { HiAnime } from "aniwatch";
 
-const GetEpisodeSources = express.Router();
+const router = Router();
 
-GetEpisodeSources.get("/:epid", async (req, res) => {
-  const hianime = new HiAnime.Scraper(); // Fresh instance
+async function fetchWithRetry(episodeId, server, category, maxRetries = 3) {
+    const hianime = new HiAnime.Scraper();
+    
+    for (let i = 0; i < maxRetries; i++) {
+        try {
+            const data = await hianime.getEpisodeSources(episodeId, server, category);
+            return { success: true, data };
+        } catch (err) {
+            console.log(`Attempt ${i + 1}/${maxRetries} failed for ${episodeId}, ${server}:`, err.message);
+            if (i === maxRetries - 1) {
+                return { success: false, error: err.message };
+            }
+            // Wait before retrying (exponential backoff: 1s, 2s, 3s)
+            await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1)));
+        }
+    }
+}
 
-  const halfEpid = req.params.epid;
-  const secondHalfEpId = req.query.ep;
+router.get("/episode/sources/:id", async (req, res) => {
+    const episodeId = `${req.params.id}?ep=${req.query.ep}`;
+    const server = req.query.s || "hd-1";
+    const category = req.query.c || "sub";
 
-  const server = req.query.s || "hd-1";
-  const subOrDub = req.query.c;
+    const result = await fetchWithRetry(episodeId, server, category);
 
-  const episodeId = `${halfEpid}?ep=${secondHalfEpId}`;
-
-  try {
-    const data = await hianime.getEpisodeSources(episodeId, server, subOrDub);
-    // console.log(data);
-    return res.status(200).send(data);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("Something went wrong!");
-  }
+    if (result.success) {
+        return res.json(result.data);
+    } else {
+        return res.status(500).json({ error: result.error });
+    }
 });
 
-export default GetEpisodeSources;
+export default router;
