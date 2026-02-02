@@ -7,6 +7,7 @@ const allowedDomains = [
     "http://localhost:3002",
     "http://localhost:4000",
     "http://192.168.1.5:3000",
+    "https://komorebi-tv.vercel.app"
 ];
 
 export default allowedDomains;
