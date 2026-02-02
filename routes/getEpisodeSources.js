@@ -5,7 +5,7 @@ const router = Router();
 
 async function fetchWithRetry(episodeId, server, category, maxRetries = 3) {
     const hianime = new HiAnime.Scraper();
-    
+
     for (let i = 0; i < maxRetries; i++) {
         try {
             const data = await hianime.getEpisodeSources(episodeId, server, category);
@@ -21,7 +21,7 @@ async function fetchWithRetry(episodeId, server, category, maxRetries = 3) {
     }
 }
 
-router.get("/episode/sources/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     const episodeId = `${req.params.id}?ep=${req.query.ep}`;
     const server = req.query.s || "hd-1";
     const category = req.query.c || "sub";
